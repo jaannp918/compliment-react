@@ -1,33 +1,27 @@
+import { useState } from "react";
+import "./App.css";
 
-
-
-
+const compliments = [
+  "You're not average — stop thinking that.",
+  "You’re doing better than you think.",
+  "Discipline will take you where motivation can’t.",
+  "Stay quiet. Let results talk.",
+  "You don’t need validation to be valuable.",
+  "Most people quit. You didn’t.",
+  "You’re building something real."
+];
 
 export default function App() {
-  const compliments = [
-    "You are smarter than you think.",
-    "You have great taste.",
-    "You’re doing better than yesterday.",
-    "You’re not average — stop thinking that.",
-    "You actually finished this. Respect."
-  ];
+  const [index, setIndex] = useState(0);
 
-  const random =
-    compliments[Math.floor(Math.random() * compliments.length)];
+  const nextCompliment = () => {
+    setIndex((prev) => (prev + 1) % compliments.length);
+  };
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "#0f172a",
-      color: "white",
-      fontSize: "22px",
-      padding: "20px",
-      textAlign: "center"
-    }}>
-      {random}
+    <div className="container" onClick={nextCompliment}>
+      <p className="text">{compliments[index]}</p>
+      <span className="hint">Tap anywhere</span>
     </div>
   );
 }
